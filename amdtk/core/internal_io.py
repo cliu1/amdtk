@@ -414,6 +414,7 @@ def writeMlf(out, data, sampPeriod=100000, header=True):
     else:
         __write_mlf(out, data, sampPeriod, header)
 
+'''
 def readHtkLattice(lattfile, ac_weight=1., lm_weight=1., gzipped=True):
     """Read a HTK lattice file and represent it as a OpenFst object.
 
@@ -494,4 +495,5 @@ def readHtkLattice(lattfile, ac_weight=1., lm_weight=1., gzipped=True):
                               end_node)
                 fst_lattice.add_arc(start_node, arc)
     return fst_lattice, id2label
+'''
     

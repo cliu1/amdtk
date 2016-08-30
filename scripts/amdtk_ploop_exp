@@ -26,12 +26,14 @@ def main():
         model = pickle.load(f)
 
     # Load the features for the alignment.
-    X = amdtk.readHtk(args.feats)
+    #X = amdtk.readHtk(args.feats)
+    X = amdtk.readKaldi(args.feats)
 
     # Eventually, load an alternative set of features for the
     # accumulation.
     if args.new_feats is not None:
-        Y = amdtk.readHtk(args.new_feats)
+        #Y = amdtk.readHtk(args.new_feats)
+        Y = amdtk.readKaldi(args.new_feats)
     else:
         Y = None
 

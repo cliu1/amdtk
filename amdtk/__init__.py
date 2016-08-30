@@ -6,7 +6,7 @@ from .core import writeHtkLabels
 from .core import readTimitLabels
 from .core import readMlf
 from .core import writeMlf
-from .core import readHtkLattice
+#from .core import readHtkLattice
 
 from .core import ParallelEnv
 
@@ -25,4 +25,6 @@ from .core import initNgramLM
 from .core import sampleNgramLM
 from .core import resampleNgramLM
 from .core import NgramLMLogLikelihood
-from .core  import samplePathFromFst
+#from .core  import samplePathFromFst
+
+from .core import readKaldi, readKaldi_scp

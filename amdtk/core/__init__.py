@@ -6,7 +6,7 @@ from .internal_io import writeHtkLabels
 from .internal_io import readTimitLabels
 from .internal_io import readMlf
 from .internal_io import writeMlf
-from .internal_io import readHtkLattice
+#from .internal_io import readHtkLattice
 
 from .parallel import ParallelEnv
 
@@ -25,5 +25,7 @@ from .lm_controller  import initNgramLM
 from .lm_controller  import sampleNgramLM
 from .lm_controller  import resampleNgramLM
 from .lm_controller  import NgramLMLogLikelihood
-from .lm_controller  import samplePathFromFst
+#from .lm_controller  import samplePathFromFst
+
+from .internal_io_kaldi import readKaldi, readKaldi_scp
 

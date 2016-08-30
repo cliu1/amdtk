@@ -24,7 +24,8 @@ def main():
         model = pickle.load(f)
 
     # Load the features.
-    X, infos = amdtk.readHtk(args.feats, infos=True)
+    #X, infos = amdtk.readHtk(args.feats, infos=True)
+    X, infos = amdtk.readKaldi(args.feats, infos=True)
 
     # Compute the forward-backward per-frame posteriors.
     p = amdtk.phoneLoopForwardBackwardPosteriors(model, X, 

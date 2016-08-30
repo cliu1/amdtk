@@ -24,7 +24,8 @@ def main():
     with open(args.featlist, 'r') as f:
         for line in f:
             path = line.strip()
-            X = amdtk.readHtk(path)
+            #X = amdtk.readHtk(path)
+            X = amdtk.readKaldi(path)
             if mean is None:
                 mean = np.zeros(X.shape[1])
                 cov = np.zeros_like(mean)

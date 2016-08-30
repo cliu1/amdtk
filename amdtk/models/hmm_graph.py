@@ -629,6 +629,7 @@ class HmmGraph(object):
 
         self._log_A = self.logProbTrans()
 
+'''
     def toFst(self):
         """Convert the HMM graph to an OpenFst object.
 
@@ -676,3 +677,5 @@ class HmmGraph(object):
             f.add_arc(fstid, arc)
 
         return f
+'''
+

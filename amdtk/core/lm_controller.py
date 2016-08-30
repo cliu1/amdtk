@@ -3,7 +3,7 @@
 
 import numpy as np
 import string
-import pywrapfst as fst
+#import pywrapfst as fst
 from ..models.hpyp import EMPTY_CONTEXT
 from ..models.hpyp import VOCAB_START
 from ..models.hierarchical_language_model import SPECIAL_VOCAB
@@ -345,6 +345,7 @@ def __walkFst(f, state, id2label, path):
     __walkFst(f, arc.nextstate, id2label, path)
 
 
+'''
 def samplePathFromFst(fst_lattice, id2label):
     """Sample path from a lattice.
 
@@ -369,6 +370,7 @@ def samplePathFromFst(fst_lattice, id2label):
     __walkFst(stoc_fst_lattice, stoc_fst_lattice.start, id2label, path)
 
     return path
+'''
 
 
 
