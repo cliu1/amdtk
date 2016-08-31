@@ -43,47 +43,77 @@ parallel_opts="-q $queues -l arch=\"*64\",mem_free=1G,ram_free=1G"
 
 n=0 
 
-echo "===================================================="
-echo "($((++n))) Data preparation..."
-echo "===================================================="
-##local/prepare_data.sh \
-##    $setup || exit 1
+stage=1
 
-#local/prepare_data_clsp.sh $setup || exit 1 # Use this on clsp grid
-echo done
+if [ $stage -le 0 ]; then
+  echo "===================================================="
+  echo "($((++n))) Data preparation..."
+  echo "===================================================="
+  ##local/prepare_data.sh \
+  ##    $setup || exit 1
 
-echo "===================================================="
-echo "($((++n))) Features extraction..."
-echo "===================================================="
-#utils/extract_features_db.sh \
-#    $setup \
-#    "$parallel_opts" || exit 1
+  #local/prepare_data_clsp.sh $setup || exit 1 # Use this on clsp grid
+  echo done
 
-    #"-q $queues -l matylda5=0.3" || exit 1
-echo done
+  echo "===================================================="
+  echo "($((++n))) Features extraction..."
+  echo "===================================================="
+  #utils/extract_features_db.sh \
+  #    $setup \
+  #    "$parallel_opts" || exit 1
 
-#date && exit 0;
+      #"-q $queues -l matylda5=0.3" || exit 1
+  echo done
 
-echo "===================================================="
-echo "($((++n))) Creating the model..."
-echo "===================================================="
-utils/phone_loop_create.sh \
-    $setup \
-    $train_keys \
-    $root/$model_type/initial_model || exit 1
-echo done
+  #date && exit 0;
+fi
 
-echo "===================================================="
-echo "($((++n))) Training the model with unigram LM..."
-echo "===================================================="
-utils/phone_loop_train.sh \
-    $setup \
-    "$parallel_opts" \
-    10 \
-    $train_keys \
-    $root/$model_type/initial_model \
-    $root/$model_type/unigram || exit 1
+if [ $stage -le 1 ]; then
+  echo "===================================================="
+  echo "($((++n))) Creating the model..."
+  echo "===================================================="
+  utils/phone_loop_create.sh \
+      $setup \
+      $train_keys \
+      $root/$model_type/initial_model || exit 1
+  echo done
 
-    #"-q $queues -l matylda5=0.5" \
-echo done
+  echo "===================================================="
+  echo "($((++n))) Training the model with unigram LM..."
+  echo "===================================================="
+  utils/phone_loop_train.sh \
+      $setup \
+      "$parallel_opts" \
+      10 \
+      $train_keys \
+      $root/$model_type/initial_model \
+      $root/$model_type/unigram || exit 1
+
+      #"-q $queues -l matylda5=0.5" \
+  echo done
+fi
+
+dir=$root/$model_type/unigram
+if [ $stage -le 2 ]; then
+  echo "===================================================="
+  echo "Labeling "
+
+  utils/phone_loop_label.sh $setup "$parallel_opts" $train_keys \
+    $dir $dir/labels_10 || exit 1;
+
+  echo done && date
+fi
+
+if [ $stage -le 3 ]; then
+  echo "===================================================="
+  echo "Scoring "
+
+  utils/score_labels.sh $setup $train_keys $dir/labels_10 $dir || exit 1;
+
+  echo done && date
+fi
+
+
+
+
 

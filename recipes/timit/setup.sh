@@ -9,7 +9,8 @@
 ############################################################################
 # Directories.                                                             #
 ############################################################################
-db_path=/export/corpora/LDC/LDC93S1/timit/TIMIT
+#db_path=/export/corpora/LDC/LDC93S1/timit/TIMIT
+db_path=/export/corpora5/LDC/LDC93S1/timit/TIMIT
 #db_path=/mnt/matylda2/data/TIMIT/timit
 root=$(pwd -P)
 
@@ -25,7 +26,7 @@ root=$(pwd -P)
 export AMDTK_PARALLEL_ENV="sge"
 
 #parallel_n_core=4
-parallel_n_core=120
+parallel_n_core=100
 
 parallel_profile="--profile $root/path.sh"
 
@@ -68,14 +69,17 @@ alpha=3
 kappa=5
 a=3
 b=3
-model_type="ploop_${fea_type}_c${concentration}_T${truncation}_sil${sil_ngauss}_s${nstates}_g${ncomponents}_a${a}_b${b}"
+#model_type="ploop_${fea_type}_c${concentration}_T${truncation}_sil${sil_ngauss}_s${nstates}_g${ncomponents}_a${a}_b${b}"
 
 ############################################################################
 # Language model training.                                                 #
 ############################################################################
 lm_params=".5,1:.5,1"
 
-unigram_ac_weight=1.0
+#unigram_ac_weight=1.0
+unigram_ac_weight=0.2
+
+model_type="ploop_${fea_type}_c${concentration}_T${truncation}_s${nstates}_g${ncomponents}_a${a}_b${b}_ac$unigram_ac_weight"
 
 ############################################################################
 # Posteriors generation.                                                   #
