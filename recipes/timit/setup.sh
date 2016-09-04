@@ -76,8 +76,9 @@ b=3
 ############################################################################
 lm_params=".5,1:.5,1"
 
-#unigram_ac_weight=1.0
-unigram_ac_weight=0.2
+unigram_ac_weight=1.0
+#unigram_ac_weight=0.2
+#unigram_ac_weight=0.1
 
 model_type="ploop_${fea_type}_c${concentration}_T${truncation}_s${nstates}_g${ncomponents}_a${a}_b${b}_ac$unigram_ac_weight"
 
