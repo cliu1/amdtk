@@ -38,8 +38,11 @@ mkdir -p $out_dir
 # extract all labels from current run, if not done so already
 if [ ! -e $score_lbs ]; then
     echo "Concatenating AUD labels..."
-    lab_files=$(awk -v label_dir="$label_dir" '{ print label_dir "/" $0 ".lab"}' $keys)
-    amdtk_concat --htk $lab_files $score_lbs
+    #lab_files=$(awk -v label_dir="$label_dir" '{ print label_dir "/" $0 ".lab"}' $keys)
+    #amdtk_concat --htk $lab_files $score_lbs
+    pushd $label_dir || exit 1;
+    amdtk_concat --htk *.lab $score_lbs || exit 1;
+    popd
 fi
 
 # perform scoring if not done already
